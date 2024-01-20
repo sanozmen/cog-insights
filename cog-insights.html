@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="title" content="Interactive COG Map Viewer" />
+    <meta
+      name="description"
+      content="An interactive web tool for viewing and analyzing COG (GeoTIFF) data on maps, featuring location search, data comparison, and dynamic scaling."
+    />
+    <meta
+      name="keywords"
+      content="GeoTIFF, COG, georaster, cloud optimized geotiff, interactive map, data analysis, location search, data comparison, geospatial data, map visualization, leaflet maps, leaflet.js"
+    />
+    <meta name="author" content="San Ozmen" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+    <div id="map" style="height: 100vh"></div>
+    <div id="loader" class="loader"></div>
+    <div id="transparencyControl">
+      <label for="transparencySlider">TIFF Opacity:</label>
+      <br />
+      <input
+        type="range"
+        id="transparencySlider"
+        min="0"
+        max="1"
+        step="0.1"
+        value="0.5"
+      />
+    </div>
+
+    <div id="sidePane">
+      <div class="side-pane-title">
+        COG Insights
+        <p style="margin: 0px; font-weight: normal">
+          Interactive GeoRaster Viewer and Analyser
+        </p>
+        <p></p>
+      </div>
+
+      <!-- COG URL Input -->
+      <div class="control-section">
+        <label for="cogUrlInput">COG URL:</label>
+        <input type="text" id="cogUrlInput" placeholder="Enter COG URL" />
+      </div>
+
+      <button id="loadCogButton">Load COG</button>
+
+      <!-- Scale Domain Control Row -->
+      <div class="control-row">
+        <div class="control-section">
+          <label for="scaleMin">Min. Pixel Value</label>
+          <input type="number" id="scaleMin" value="200" />
+        </div>
+        <div class="control-section">
+          <label for="scaleMax">Max. Pixel Value</label>
+          <input type="number" id="scaleMax" value="1100" />
+        </div>
+      </div>
+
+      <!-- Transparent Pixel Control Row -->
+      <div class="control-row">
+        <div class="control-section">
+          <label for="transparentMin">No Data <</label>
+          <input type="number" id="transparentMin" value="159" />
+        </div>
+        <div class="control-section">
+          <label for="transparentMax">No Data ></label>
+          <input type="number" id="transparentMax" value="1500" />
+        </div>
+      </div>
+
+      <!-- Apply Settings Button -->
+      <button id="applySettingsButton">Apply</button>
+
+      <!-- Color Scale Selection Dropdown -->
+      <div class="control-section">
+        <label for="colorScaleSelect">Color Scale:</label>
+        <select id="colorScaleSelect">
+          <option value="Spectral">Spectral</option>
+          <option value="Viridis">Viridis</option>
+          <option value="Accent">Accent</option>
+          <option value="Blues">Blues</option>
+          <option value="Greens">Greens</option>
+          <option value="Oranges">Oranges</option>
+          <option value="Greys">Greys</option>
+          <option value="OrRd">OrRd</option>
+          <option value="BrBG">BrBG</option>
+          <option value="BuPu">BuPu</option>
+          <option value="Dark2">Dark2</option>
+          <option value="GnBu">GnBu</option>
+          <option value="PRGn">PRGn</option>
+          <option value="PuOr">PuOr</option>
+          <option value="RdBu">RdBu</option>
+          <option value="RdYlBu">RdYlBu</option>
+          <option value="RdYlGn">RdYlGn</option>
+          <option value="Pastel1">Pastel1</option>
+          <option value="Pastel2">Pastel2</option>
+          <option value="Set1">Set1</option>
+          <option value="Set2">Set2</option>
+          <option value="Set3">Set3</option>
+        </select>
+      </div>
+
+      <div id="border1" class="border"></div>
+
+      <div id="chartContainer">
+        <canvas id="scatterChart"></canvas>
+      </div>
+      <div id="border2" class="border"></div>
+      <div id="instructions">
+        <h2>How to Use</h2>
+        <ul>
+          <li>
+            <strong>Viewing GeoTIFF Data:</strong> Hover over the map to view
+            values at different locations.
+          </li>
+          <li>
+            <strong>Adding Markers:</strong> Click on the map to add markers.
+            The markers will display the GeoTIFF data value at the clicked
+            location. Marker numbers are displayed next to each marker.
+          </li>
+          <li>
+            <strong>Comparing Data:</strong> Click "Add to Comparison" on a
+            marker's popup to add that marker's data to the comparison graph.
+          </li>
+          <li>
+            <strong>Finding Your Location:</strong> Click the "Find Me" button
+            at the top left to center the map on your location and add a marker
+            at your location.
+          </li>
+          <li>
+            <strong>Searching for Locations:</strong> Use the search bar at the
+            top left to search for locations. A marker will be added at the
+            searched location.
+          </li>
+          <li>
+            <strong>Removing Individual Markers:</strong> Right-click the marker
+            to remove it from the map and graph. If on mobile, long press nearby
+            the marker.
+          </li>
+          <li>
+            <strong>Clearing Markers:</strong> Click the "Clear All Markers"
+            button at the top left to remove all markers from the map and clear
+            the comparison graph.
+          </li>
+          <li>
+            <strong>Adjusting Opacity:</strong> Use the opacity slider at the
+            top left to adjust the opacity of the GeoTIFF layer.
+          </li>
+          <li>
+            <strong>Customizing Data Visualization:</strong> Adjust the minimum
+            and maximum pixel values to refine the data visualization according
+            to specific thresholds. This can help in focusing on areas of
+            interest within the GeoTIFF data.
+          </li>
+          <li>
+            <strong>Setting No Data:</strong> Set minimum and maximum values to
+            define the range for transparent pixels.
+          </li>
+          <li>
+            <strong>Choosing Color Scales:</strong> Select a color scale from
+            the dropdown in the 'Color Scale Selection' section to change the
+            color theme of the GeoTIFF visualization. Different color scales can
+            be used to highlight various aspects of the data.
+          </li>
+          <li>
+            <strong>Applying Custom Settings:</strong> After adjusting settings
+            such as scale domain, transparency, and color scale, click the
+            'Apply' button to update the map with these new settings.
+          </li>
+          <li>
+            <strong>Loading Custom GeoTIFF:</strong> Enter the URL of a
+            Cloud-Optimized GeoTIFF (COG) in the 'COG URL' input field and press
+            'Load COG' to view a different GeoTIFF on the map.
+          </li>
+          <li>
+            <strong>Viewing Data Legends:</strong> Refer to the legend at the
+            bottom left of the map for understanding the GeoTIFF data value
+            color coding.
+          </li>
+          <li>
+            <strong>Interactive Data Analysis:</strong> Use the scatter chart in
+            the side pane to analyze the relationship between different markers
+            added to the comparison list. The chart dynamically updates as you
+            add or remove markers from the comparison.
+          </li>
+          <li>
+            <strong>Expanding and Collapsing Side Pane:</strong> Use the toggle
+            button at the edge of the side pane to expand or collapse the pane
+            for a better view of the map and chart.
+          </li>
+        </ul>
+      </div>
+      <div id="border" class="border"></div>
+
+      <div id="references">
+        <p>
+          This project would not have been possible without the help of these
+          great open-source projects. Many thanks to all who maintain them:
+        </p>
+        <ul>
+          <li><a href="https://github.com/Leaflet/Leaflet" target="_blank">Leaflet</a></li>
+          <li><a href="https://github.com/GeoTIFF/georaster" target="_blank">GeoRaster</a></li>
+          <li><a href="https://github.com/gka/chroma.js" target="_blank">Chroma</a></li>
+          <li>
+            <a href="https://github.com/GeoTIFF/georaster-layer-for-leaflet" target="_blank"
+              >georaster-layer-for-leaflet
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/GeoTIFF/geoblaze" target="_blank">geoblaze </a>
+          </li>
+          <li>
+            <a href="https://github.com/chartjs" target="_blank">chart.js </a>
+          </li>
+          <li>
+            <a href="https://github.com/perliedman/leaflet-control-geocoder" target="_blank"
+              >leaflet-control-geocoder</a
+            >
+          </li>
+          <!-- Add other libraries here in a similar format -->
+        </ul>
+
+        <p>
+          Data Source:
+          <a href="https://earthquake.usgs.gov/data/vs30/" target="_blank"
+            >Global Vs30 Mosaic</a
+          >
+        </p>
+      </div>
+    </div>
+
+    <div id="toggleButton" onclick="togglePane()"></div>
+
+    <div id="pixelValue"></div>
+    <div id="legend">
+      <h4>Legend (V<sub>S30</sub> Values)</h4>
+      <!-- Legend items will be added dynamically -->
+    </div>
+
+    <script src="js/leaflet.js"></script>
+    <script src="js/georaster.js"></script>
+    <script src="js/chroma.js"></script>
+    <script src="js/georaster-layer-for-leaflet.js"></script>
+    <script src="js/geoblaze.js"></script>
+    <script src="js/chart.js"></script>
+    <link rel="stylesheet" href="css/ControlGeocoder.css" />
+    <script src="js/ControlGeocoder.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
