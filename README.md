@@ -39,7 +39,7 @@ For a detailed showcase of the Interactive COG Map Viewer, you can watch tutoria
 Contributions are welcome. Please read the contribution guidelines before submitting pull requests.
 
 ## License
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License
 
 ## Acknowledgments
 Special thanks to the contributors of Leaflet, GeoRaster, Chroma.js, Chart.js, and other libraries that made this tool possible.
