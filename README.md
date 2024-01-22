@@ -4,6 +4,9 @@
 ## Description
 The Interactive COG Map Viewer is a web-based tool designed for visualizing and analyzing Cloud-Optimized GeoTIFF (COG) data. This library integrates geospatial data visualization with interactive mapping features, allowing users to dynamically adjust settings like transparency, scale domain, and color scale for GeoTIFF layers. It also includes functionalities like location search, data comparison, and marker management. The tool has been built using plain JavaScript, CSS, and HTML.
 
+[**DEMO**](https://sanozmen.github.io/cog-insights/cog-insights.html)
+
+
 ## Features
 - **Dynamic GeoTIFF Visualization:** Load and display COG data on interactive maps.
 - **Pixel Value and 'No Data' Interval Settings:** Define specific pixel value ranges and handle intervals for 'no data' values.
