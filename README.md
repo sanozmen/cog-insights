@@ -2,22 +2,15 @@
 # Interactive COG Map Viewer
 
 ## Description
-The Interactive COG Map Viewer is a web-based tool designed for visualizing and analyzing Cloud-Optimized GeoTIFF (COG) data. This application integrates geospatial data visualization with interactive mapping features, allowing users to dynamically adjust settings like transparency, scale domain, and color scale for GeoTIFF layers. It also includes functionalities like location search, data comparison, and marker management.
+The Interactive COG Map Viewer is a web-based tool designed for visualizing and analyzing Cloud-Optimized GeoTIFF (COG) data. This library integrates geospatial data visualization with interactive mapping features, allowing users to dynamically adjust settings like transparency, scale domain, and color scale for GeoTIFF layers. It also includes functionalities like location search, data comparison, and marker management. The tool has been built using plain JavaScript, CSS, and HTML.
 
 ## Features
 - **Dynamic GeoTIFF Visualization:** Load and display COG data on interactive maps.
-- **Adjustable Map Settings:** Customize transparency, scale domain, and color scales.
+- **Adjustable Map Settings:** Customize opacity, transparency and color scales.
 - **Interactive Data Analysis:** Analyze data with an integrated scatter chart.
 - **Responsive Design:** Crafted with a responsive layout for various devices.
-- **Location Search and Geocoding:** Find and center on specific coordinates.
+- **Location Search and Geocoding:** Find and center on specific locations.
 - **Marker Management:** Add, remove, or compare markers with COG data values.
-
-## Technologies Used
-- **Leaflet.js:** For rendering the interactive maps.
-- **GeoRaster:** To parse and handle GeoTIFF data.
-- **Chroma.js:** For color scale manipulations.
-- **Chart.js:** To create interactive scatter charts.
-- **CSS:** Custom styling for a user-friendly interface.
 
 ## Installation and Setup
 1. **Clone the Repository:** `git clone [repository-url]`
