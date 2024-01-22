@@ -6,11 +6,13 @@ The Interactive COG Map Viewer is a web-based tool designed for visualizing and 
 
 ## Features
 - **Dynamic GeoTIFF Visualization:** Load and display COG data on interactive maps.
-- **Adjustable Map Settings:** Customize opacity, transparency and color scales.
+- **Pixel Value and 'No Data' Interval Settings:** Define specific pixel value ranges and handle intervals for 'no data' values.
+- **Adjustable Map/Legend Settings:** Customize opacity and color scales.
+- **Real-Time Pixel Value Display:** View pixel values in an info box at the top right corner while hovering over the map.
 - **Interactive Data Analysis:** Analyze data with an integrated scatter chart.
-- **Responsive Design:** Crafted with a responsive layout for various devices.
 - **Location Search and Geocoding:** Find and center on specific locations.
-- **Marker Management:** Add, remove, or compare markers with COG data values.
+- **Marker Management:** Add, remove, or compare markers with COG data values. 
+- **Responsive Design:** Crafted with a responsive layout for various devices (not perfect in mobile yet though).
 
 ## Installation and Setup
 1. **Clone the Repository:** `git clone [repository-url]`
@@ -19,9 +21,8 @@ The Interactive COG Map Viewer is a web-based tool designed for visualizing and 
 
 ## Usage
 - **Load GeoTIFF Data:** Enter the URL of a Cloud-Optimized GeoTIFF or use the provided sample data.
-- **Explore Features:** Utilize the interactive map and side panel controls for data analysis.
-- **Adjust Settings:** Customize the visualization by adjusting opacity, pixel value scales, and color scales.
-- **Add Markers:** Click on the map to add markers and analyze specific data points.
+- **Adjust Settings:** Customize the visualization by adjusting opacity, pixel/no data intervals and color scales.
+- **Add Markers:** Click on the map, find your location or search an address to add markers and analyze specific data points.
 - **Data Comparison:** Use the scatter chart for comparing data at different locations.
 
 For a detailed showcase of the Interactive COG Map Viewer, you can watch tutorial video by clicking the image below.
