@@ -39,7 +39,7 @@ Contributions are welcome.
 This project is licensed under the MIT License
 
 ## Acknowledgments
-Special thanks to the contributors of Leaflet, GeoRaster, Chroma.js, Chart.js, and other libraries that made this tool possible.
+Special thanks to the contributors of Leaflet, GeoRaster, Chroma.js, Chart.js, and other libraries that made this project possible.
 
 
 
