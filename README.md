@@ -7,7 +7,7 @@ The Interactive COG Map Viewer is a web-based tool designed for visualizing and 
 [**DEMO**](https://sanozmen.github.io/cog-insights/cog-insights.html)
 
 
-## Features
+## Main Features
 - **Dynamic GeoTIFF Visualization:** Load and display COG data on interactive maps.
 - **Pixel Value and 'No Data' Interval Settings:** Define specific pixel value ranges and handle intervals for 'no data' values.
 - **Adjustable Map/Legend Settings:** Customize opacity and color scales.
@@ -23,10 +23,24 @@ The Interactive COG Map Viewer is a web-based tool designed for visualizing and 
 3. **Open `index.html`:** Launch the file in a web browser.
 
 ## Usage
-- **Load GeoTIFF Data:** Enter the URL of a Cloud-Optimized GeoTIFF or use the provided sample data.
-- **Adjust Settings:** Customize the visualization by adjusting opacity, pixel/no data intervals and color scales.
-- **Add Markers:** Click on the map, find your location or search an address to add markers and analyze specific data points.
-- **Data Comparison:** Use the scatter chart for comparing data at different locations.
+
+- **Viewing GeoTIFF Data:** Hover over the map to view values at different locations.
+  
+- **Adding Markers:** Click on the map to add markers. The markers will display the GeoTIFF data value at the clicked location. Marker numbers are displayed next to each marker.
+- **Comparing Data:** Click "Add to Comparison" on a marker's popup to add that marker's data to the comparison graph.
+- **Finding Your Location:** Click the "Find Me" button at the top left to center the map on your location and add a marker at your location.
+- **Searching for Locations:** Use the search bar at the top left to search for locations. A marker will be added at the searched location.
+- **Removing Individual Markers:** Right-click the marker to remove it from the map and graph. If on mobile, long press nearby the marker.
+- **Clearing Markers:** Click the "Clear All Markers" button at the top left to remove all markers from the map and clear the comparison graph.
+- **Adjusting Opacity:** Use the opacity slider at the top left to adjust the opacity of the GeoTIFF layer.
+- **Customizing Data Visualization:** Adjust the minimum and maximum pixel values to refine the data visualization according to specific thresholds. This can help in focusing on areas of interest within the GeoTIFF data.
+- **Setting No Data:** Set minimum and maximum values to define the range for transparent pixels.
+- **Choosing Color Scales:** Select a color scale from the dropdown in the 'Color Scale Selection' section to change the color theme of the GeoTIFF visualization. Different color scales can be used to highlight various aspects of the data.
+- **Applying Custom Settings:** After adjusting settings such as scale domain, transparency, and color scale, click the 'Apply' button to update the map with these new settings.
+- **Loading Custom GeoTIFF:** Enter the URL of a Cloud-Optimized GeoTIFF (COG) in the 'COG URL' input field and press 'Load COG' to view a different GeoTIFF on the map.
+- **Viewing Data Legends:** Refer to the legend at the bottom left of the map for understanding the GeoTIFF data value color coding.
+   **Interactive Data Analysis:** Use the scatter chart in the side pane to analyze the relationship between different markers added to the comparison list. The chart dynamically updates as you add or remove markers from the comparison.
+- **Expanding and Collapsing Side Pane:** Use the toggle button at the edge of the side pane to expand or collapse the pane for a better view of the map and chart.
 
 For a detailed showcase of the Interactive COG Map Viewer, you can watch tutorial video by clicking the image below.
 
