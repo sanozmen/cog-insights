@@ -5,9 +5,9 @@ var georaster;
 var map = L.map("map").setView([40.358056, 33.063611], 10);
 
 // Add OpenStreetMap basemap
-L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution:
-    '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+    "&copy; <a href='&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors",
 }).addTo(map);
 
 // Parse GeoRaster and add it to the map
